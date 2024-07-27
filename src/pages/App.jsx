@@ -6,6 +6,7 @@ import Home from './components/Home.jsx'
 import ConvertFormat from './components/ConvertFormat.jsx'
 import Markdown from './components/markdown/Markdown.jsx'
 import ImageConvert from './components/ImageConvert.jsx'
+import VideoPlayer from './components/VideoPlayer.jsx'
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -26,6 +27,11 @@ const items = [
     icon: <MailOutlined />,
   },
   {
+    key: '/videoPlayer',
+    label: '视频播放器',
+    icon: <MailOutlined />,
+  },
+  {
     key: '/convertFormat',
     label: '视频转换',
     icon: <MailOutlined />,
@@ -33,7 +39,7 @@ const items = [
 ];
 
 function App() {
-  const [current, setCurrent] = useState('/home');
+  const [current, setCurrent] = useState('/videoPlayer');
   const navigate = useNavigate();
 
   const onClick = (e) => {
@@ -57,11 +63,12 @@ function App() {
           <Layout>
             <Content className='contentStyle'>
               <Routes>
-                <Route path='/' element={<Navigate to="/home"/>}></Route>
+                <Route path='/' element={<Navigate to="/videoPlayer"/>}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/convertFormat' element={<ConvertFormat />}></Route>
                 <Route path='/markdown' element={<Markdown />}></Route>
                 <Route path='/imageConvert' element={<ImageConvert />}></Route>
+                <Route path='/videoPlayer' element={<VideoPlayer />}></Route>
                 
                 <Route path='*' element={<div>页面丢失了</div>}></Route>
               </Routes>

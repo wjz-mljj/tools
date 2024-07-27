@@ -1,6 +1,8 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('node:path');
 const bcrypt = require('bcryptjs');
+// const VLC = require('libvlc');
+const fs = require('fs');
 const converFormat = require('./electron/converFormat.js')
 const imageConvert = require('./electron/imageConvert.js')
 
@@ -32,10 +34,12 @@ const createWindow = () => {
   imageConvert();
 };
 
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
+
   createWindow();
 
   // On OS X it's common to re-create a window in the app when the
@@ -69,4 +73,13 @@ ipcMain.handle('check-server-status', () => {
     p,
   };
 });
+
+let player;
+// ipcMain.on('play-video', (event, filePath) => {
+//   if (player) {
+//     player.stop();
+//   }
+//   player = new VLC();
+//   player.play(filePath);
+// });
 

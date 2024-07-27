@@ -5,8 +5,16 @@ import { guid, getFileSuffix } from '../utils/func.js';
 
 const { Text } = Typography;
 
+const formatArr = [
+  { value: 'mp4', label: 'mp4' },
+  { value: 'webm', label: 'webm' },
+  { value: 'mov', label: 'mov' },
+  { value: 'avi', label: 'avi' }
+]
+
 const ConvertFormat = () => {
   const [messageApi, contextHolder] = message.useMessage();
+  const [formatData, setFormatData] = useState([...formatArr]);
   const [filename, setFilename] = useState('');
   const [errorFlag, setErrorFlag] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
@@ -36,6 +44,19 @@ const ConvertFormat = () => {
       let key = guid();
       let ext = getFileSuffix(info.file.name); // 后缀名 如：mp4
       let keyName = `${key}.${ext}`;
+      if (ext.toLocaleLowerCase() === 'mp4' || ext.toLocaleLowerCase() === 'mov') {
+        console.log(111);
+        setFormatData([ 
+          ...formatArr, 
+          { value: 'flv', label: 'flv' },
+          // { value: 'wmv', label: 'wmv' },
+          // { value: 'mkv', label: 'mkv' },
+          { value: 'm4v', label: 'm4v' },
+        ])
+      } else {
+        setFormatData([ ...formatArr ]);
+      }
+  
       setKeyId(key);
       setKeyFileName(keyName);
       const CHUNK_SIZE = 1024 * 1024 * 5; // 每次传输5MB
@@ -109,6 +130,28 @@ const ConvertFormat = () => {
     });
   }
 
+    // 保存视频
+    const handleSave = () => {
+      if (converPadding != '100') {
+        messageApi.open({ type: 'warning', content: '请先转换！' });
+        return;
+      }
+      setSaveLoading(true)
+      let obj = {key: keyFileName, format: formatValue, keyId }
+      console.log('handleSave:::', obj);
+      
+      window.ipcRenderer.send('save-file', { ...obj });
+  
+      window.ipcRenderer.on('copy-file-response', (event, message) => {
+        console.log(message); // 在控制台打印消息
+        setSaveData({success: message.success, msg: message.filePath})
+        setSaveLoading(false)
+        if (message.success == 'error') {
+          messageApi.open({ type: 'error', content: '报错失败，请重试！' });
+        }
+      });
+    }
+
   const renderText = () => {
     let type = 'success';
     let context = '';
@@ -131,6 +174,18 @@ const ConvertFormat = () => {
       context = `转换失败，请从第一步重新开始！`;
     } else if (converPadding) {
       context = `转换中:::${converPadding}%`;
+    }
+    return <Text type={type}>{context}</Text>
+  }
+
+  const renderTextThree = () => {
+    let type = 'success';
+    let context = '';
+    if (saveData.success == 'success') {
+      context = `已保存到桌面(位置: ${saveData.msg})`
+    } else if (saveData.success == 'error') {
+      type = 'danger';
+       context = `保存失败，请重试！`
     }
     return <Text type={type}>{context}</Text>
   }
@@ -160,14 +215,16 @@ const ConvertFormat = () => {
         onChange={(value) => {
           setFormatValue(value)
         }}
-        options={[
-          { value: 'mp4', label: 'mp4' },
-          { value: 'webm', label: 'webm' },
-          { value: 'mov', label: 'mov' },
-          { value: 'avi', label: 'avi' }
-        ]}
+        options={[...formatData]}
       />
       <div>{renderTextTwo()}</div>
+    </div>
+    <div>
+      <p>步骤三：</p>
+      <Button loading={saveLoading} disabled={saveLoading} onClick={() => {handleSave()}}>保存视频</Button>
+      <div>
+        {renderTextThree()}
+      </div>
     </div>
   </div>)
 }
