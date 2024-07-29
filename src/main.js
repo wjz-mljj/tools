@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard, Menu } = require('electron');
 const path = require('node:path');
 const bcrypt = require('bcryptjs');
 // const VLC = require('libvlc');
@@ -34,6 +34,64 @@ const createWindow = () => {
   imageConvert();
 };
 
+const template = [
+  {
+      label: "Tools",
+      submenu: [
+          {
+              label: "隐藏",
+              role: "hide",
+          },
+          {
+              type: "separator",
+          },
+          {
+              label: "关闭",
+              accelerator: "quit",
+              click: () => {
+                  app.quit();
+              },
+          },
+      ],
+  },
+  {
+      label: "窗口",
+      submenu: [
+          { label: "剪贴", role: 'cut' },
+          { label: "拷贝", role: 'copy' },
+          { label: "全选", role: 'selectAll' },
+          { label: "粘贴", role: 'paste' },
+          { label: "后退", role: 'undo' },
+          {
+              label: "关闭",
+              role: "close",
+          },
+          {
+              label: "刷新",
+              role: "reload",
+          },
+          {
+              label: "进入全屏模式",
+              role: "togglefullscreen",
+          },
+      ],
+  },
+  {
+      label: "帮助",
+      submenu: [
+          {
+              label: "更多",
+              click: async () => {
+                  const { shell } = require("electron");
+                  await shell.openExternal("https://github.com/wjz-mljj/tools");
+              },
+          },
+      ],
+  },
+];
+
+const menu = Menu.buildFromTemplate(template);
+Menu.setApplicationMenu(menu);
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -74,12 +132,14 @@ ipcMain.handle('check-server-status', () => {
   };
 });
 
-let player;
-// ipcMain.on('play-video', (event, filePath) => {
-//   if (player) {
-//     player.stop();
-//   }
-//   player = new VLC();
-//   player.play(filePath);
-// });
-
+// 复制字符串到剪贴板
+ipcMain.handle('copy-string-clipboard', (event, data) => {
+  try{
+    clipboard.writeText(data.text);
+  } catch(err) {}
+  
+  return {
+    code: 200,
+    msg: '复制成功!'
+  };
+});

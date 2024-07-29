@@ -48,3 +48,11 @@ body {
   background-color: #fff;
 }
 
+.divCard {
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(76, 92, 70, 0.3);
+  background: #fff;
+  padding: 20px;
+  border-radius: 5px;
+}
+

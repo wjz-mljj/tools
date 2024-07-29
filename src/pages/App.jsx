@@ -7,6 +7,13 @@ import ConvertFormat from './components/ConvertFormat.jsx'
 import Markdown from './components/markdown/Markdown.jsx'
 import ImageConvert from './components/ImageConvert.jsx'
 import VideoPlayer from './components/VideoPlayer.jsx'
+import PasswordGenerato from './components/PasswordGenerato.jsx'
+import UrlCodec from './components/UrlCodec.jsx'
+import UuidGenerato from './components/UuidGenerato.jsx'
+import UrlResolution from './components/UrlResolution.jsx'
+import BinaryConvert from './components/BinaryConvert.jsx'
+
+
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -14,6 +21,31 @@ const items = [
   {
     key: '/home',
     label: '首页',
+    icon: <MailOutlined />,
+  },
+  {
+    key: '/uuidGenerato',
+    label: 'UUID生成器',
+    icon: <MailOutlined />,
+  },
+  {
+    key: '/passwordGenerato',
+    label: '密码生成器',
+    icon: <MailOutlined />,
+  },
+  {
+    key: '/urlCodec',
+    label: 'Url编码解码',
+    icon: <MailOutlined />,
+  },
+  {
+    key: '/urlResolution',
+    label: 'Url地址解析',
+    icon: <MailOutlined />,
+  },
+  {
+    key: '/binaryConvert',
+    label: '进制转换',
     icon: <MailOutlined />,
   },
   {
@@ -39,7 +71,7 @@ const items = [
 ];
 
 function App() {
-  const [current, setCurrent] = useState('/videoPlayer');
+  const [current, setCurrent] = useState('/binaryConvert');
   const navigate = useNavigate();
 
   const onClick = (e) => {
@@ -63,12 +95,17 @@ function App() {
           <Layout>
             <Content className='contentStyle'>
               <Routes>
-                <Route path='/' element={<Navigate to="/videoPlayer"/>}></Route>
+                <Route path='/' element={<Navigate to="/binaryConvert"/>}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/convertFormat' element={<ConvertFormat />}></Route>
                 <Route path='/markdown' element={<Markdown />}></Route>
                 <Route path='/imageConvert' element={<ImageConvert />}></Route>
                 <Route path='/videoPlayer' element={<VideoPlayer />}></Route>
+                <Route path='/passwordGenerato' element={<PasswordGenerato />}></Route>
+                <Route path='/urlCodec' element={<UrlCodec />}></Route>
+                <Route path='/urlResolution' element={<UrlResolution />}></Route>
+                <Route path='/uuidGenerato' element={<UuidGenerato />}></Route>
+                <Route path='/binaryConvert' element={<BinaryConvert />}></Route>
                 
                 <Route path='*' element={<div>页面丢失了</div>}></Route>
               </Routes>
