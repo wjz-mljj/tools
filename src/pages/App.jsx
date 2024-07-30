@@ -12,6 +12,7 @@ import UrlCodec from './components/UrlCodec.jsx'
 import UuidGenerato from './components/UuidGenerato.jsx'
 import UrlResolution from './components/UrlResolution.jsx'
 import BinaryConvert from './components/BinaryConvert.jsx'
+import JsonEditor from './components/JsonEditor.jsx'
 
 
 
@@ -54,6 +55,11 @@ const items = [
     icon: <MailOutlined />,
   },
   {
+    key: '/jsonEditor',
+    label: 'JSON编辑器',
+    icon: <MailOutlined />,
+  },
+  {
     key: '/imageConvert',
     label: '图片转换',
     icon: <MailOutlined />,
@@ -71,7 +77,7 @@ const items = [
 ];
 
 function App() {
-  const [current, setCurrent] = useState('/binaryConvert');
+  const [current, setCurrent] = useState('/jsonEditor');
   const navigate = useNavigate();
 
   const onClick = (e) => {
@@ -95,7 +101,7 @@ function App() {
           <Layout>
             <Content className='contentStyle'>
               <Routes>
-                <Route path='/' element={<Navigate to="/binaryConvert"/>}></Route>
+                <Route path='/' element={<Navigate to="/jsonEditor"/>}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/convertFormat' element={<ConvertFormat />}></Route>
                 <Route path='/markdown' element={<Markdown />}></Route>
@@ -106,6 +112,7 @@ function App() {
                 <Route path='/urlResolution' element={<UrlResolution />}></Route>
                 <Route path='/uuidGenerato' element={<UuidGenerato />}></Route>
                 <Route path='/binaryConvert' element={<BinaryConvert />}></Route>
+                <Route path='/jsonEditor' element={<JsonEditor />}></Route>
                 
                 <Route path='*' element={<div>页面丢失了</div>}></Route>
               </Routes>
