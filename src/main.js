@@ -1,7 +1,6 @@
 const { app, BrowserWindow, ipcMain, clipboard, Menu, globalShortcut } = require('electron');
 const path = require('node:path');
 const bcrypt = require('bcryptjs');
-// const VLC = require('libvlc');
 const fs = require('fs');
 const converFormat = require('./electron/converFormat.js')
 const imageConvert = require('./electron/imageConvert.js')

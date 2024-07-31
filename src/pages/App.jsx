@@ -20,6 +20,8 @@ function App() {
   const [current, setCurrent] = useState('/home');
   const navigate = useNavigate();
 
+  let dev = process.env.NODE_ENV === 'development'
+
   const items = [
     {
       key: '/home',
@@ -71,11 +73,12 @@ function App() {
       label: '视频播放器',
       icon: <i className={`iconfont ${current === '/videoPlayer' ? 'icon-shipinbofang-copy' : 'icon-shipinbofang-copy'}`}></i>,
     },
+    dev ? 
     {
       key: '/convertFormat',
       label: '视频转换',
       icon: <i className={`iconfont ${current === '/convertFormat' ? 'icon-shipinzhuanhuan-copy' : 'icon-shipinzhuanhuan'}`}></i>,
-    },
+    } : '',
   ];
 
   const onClick = (e) => {
@@ -100,7 +103,7 @@ function App() {
           <Layout>
             <Content className='contentStyle'>
               <Routes>
-                <Route path='/' element={<Navigate to="/"/>}></Route>
+                <Route path='/' element={<Navigate to="/home"/>}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/convertFormat' element={<ConvertFormat />}></Route>
                 <Route path='/markdown' element={<Markdown />}></Route>
