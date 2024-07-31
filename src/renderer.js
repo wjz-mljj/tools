@@ -28,5 +28,7 @@
 
 import './app.jsx';
 import './index.css';
+import '../assets/font/iconfont.js'
+import '../assets/font/iconfont.css'
 
 console.log('👋 This message is being logged by "renderer.js", included via webpack');

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, clipboard, Menu } = require('electron');
+const { app, BrowserWindow, ipcMain, clipboard, Menu, globalShortcut } = require('electron');
 const path = require('node:path');
 const bcrypt = require('bcryptjs');
 // const VLC = require('libvlc');
@@ -93,15 +93,22 @@ const template = [
 const menu = Menu.buildFromTemplate(template);
 Menu.setApplicationMenu(menu);
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
 
   createWindow();
 
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
+  // 注册 F12 作为打开控制台的快捷键
+  const ret = globalShortcut.register('F12', () => {
+    const focusedWindow = BrowserWindow.getFocusedWindow();
+    if (focusedWindow) {
+      focusedWindow.webContents.toggleDevTools();
+    }
+  });
+
+  if (!ret) {
+    console.log('注册快捷键失败');
+  }
+
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
@@ -116,6 +123,11 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit();
   }
+});
+
+app.on('will-quit', () => {
+  // 注销所有快捷键
+  globalShortcut.unregisterAll();
 });
 
 // In this file you can include the rest of your app's specific main process

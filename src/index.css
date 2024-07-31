@@ -56,3 +56,10 @@ body {
   border-radius: 5px;
 }
 
+.ant-menu-item {
+  justify-content: left !important;
+}
+.ant-menu-item .ant-menu-title-content {
+  flex: none !important;
+  margin-left: 10px !important;
+}

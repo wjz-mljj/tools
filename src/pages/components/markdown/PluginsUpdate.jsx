@@ -1,6 +1,5 @@
 
 import React, { useState, } from 'react';
-import { PluginProps } from 'react-markdown-editor-lite';
 import { Button, Popover, Input, Form, Upload, Tooltip, Segmented, Row, Col } from 'antd';
 import { QuestionCircleOutlined, UploadOutlined, PictureOutlined } from '@ant-design/icons';
 

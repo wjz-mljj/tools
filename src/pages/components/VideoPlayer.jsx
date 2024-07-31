@@ -49,9 +49,6 @@ const VideoPlayer = () => {
         case 'avi':
         case 'm4v':
         case 'ogv':
-          // setVideoWmvUrl(url);
-          // setVideoWmvFile(file)
-          // break;
         default:
           messageApi.error('暂不支持！')
           break;

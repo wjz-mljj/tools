@@ -6,7 +6,9 @@ const platform = os.platform()
 
 module.exports = {
   packagerConfig: {
+    name: '小工具合集',
     asar: true,
+    icon: "assets/icon",
   },
   rebuildConfig: {},
   makers: [

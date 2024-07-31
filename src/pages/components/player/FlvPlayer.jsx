@@ -1,4 +1,4 @@
-import React,{ useCallback, useEffect, useState, useRef } from 'react'
+import React,{ useEffect, useRef } from 'react'
 import FlvJs from 'flv.js'
 
 const FlvPlayer = ({ videoFlvUrl }) => {

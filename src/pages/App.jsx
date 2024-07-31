@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import { Navigate, Route, Routes , useNavigate} from 'react-router-dom'
 import { Layout, Menu } from 'antd';
-import { AppstoreOutlined, MailOutlined, SettingOutlined } from '@ant-design/icons';
 import Home from './components/Home.jsx'
 import ConvertFormat from './components/ConvertFormat.jsx'
 import Markdown from './components/markdown/Markdown.jsx'
@@ -15,70 +14,69 @@ import BinaryConvert from './components/BinaryConvert.jsx'
 import JsonEditor from './components/JsonEditor.jsx'
 
 
-
 const { Header, Footer, Sider, Content } = Layout;
 
-const items = [
-  {
-    key: '/home',
-    label: '首页',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/uuidGenerato',
-    label: 'UUID生成器',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/passwordGenerato',
-    label: '密码生成器',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/urlCodec',
-    label: 'Url编码解码',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/urlResolution',
-    label: 'Url地址解析',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/binaryConvert',
-    label: '进制转换',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/markdown',
-    label: 'Markdown',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/jsonEditor',
-    label: 'JSON编辑器',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/imageConvert',
-    label: '图片转换',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/videoPlayer',
-    label: '视频播放器',
-    icon: <MailOutlined />,
-  },
-  {
-    key: '/convertFormat',
-    label: '视频转换',
-    icon: <MailOutlined />,
-  },
-];
-
 function App() {
-  const [current, setCurrent] = useState('/jsonEditor');
+  const [current, setCurrent] = useState('/home');
   const navigate = useNavigate();
+
+  const items = [
+    {
+      key: '/home',
+      label: '首页',
+      icon: <i className={`iconfont ${current === '/home' ? 'icon-a-1shouye-copy' : 'icon-a-1shouye'}`}></i>,
+    },
+    {
+      key: '/uuidGenerato',
+      label: 'UUID生成器',
+      icon: <i className={`iconfont ${current === '/uuidGenerato' ? 'icon-square-u-copy' : 'icon-square-u'}`}></i>,
+    },
+    {
+      key: '/passwordGenerato',
+      label: '密码生成器',
+      icon: <i className={`iconfont ${current === '/passwordGenerato' ? 'icon-AttributeKeyDisabled-copy' : 'icon-AttributeKeyDisabled'}`}></i>,
+    },
+    {
+      key: '/urlCodec',
+      label: 'Url编码解码',
+      icon: <i className={`iconfont ${current === '/urlCodec' ? 'icon-URLguanli-copy' : 'icon-URLguanli'}`}></i>,
+    },
+    {
+      key: '/urlResolution',
+      label: 'Url地址解析',
+      icon: <i className={`iconfont ${current === '/urlResolution' ? 'icon-lianjieyouhua--copy' : 'icon-lianjieyouhua'}`}></i>,
+    },
+    {
+      key: '/binaryConvert',
+      label: '进制转换',
+      icon: <i className={`iconfont ${current === '/binaryConvert' ? 'icon-shujuchaxun-copy' : 'icon-shujuchaxun'}`}></i>,
+    },
+    {
+      key: '/markdown',
+      label: 'Markdown',
+      icon: <i className={`iconfont ${current === '/markdown' ? 'icon-file-markdown-copy' : 'icon-file-markdown'}`}></i>,
+    },
+    {
+      key: '/jsonEditor',
+      label: 'JSON编辑器',
+      icon: <i className={`iconfont ${current === '/jsonEditor' ? 'icon-json-copy' : 'icon-json'}`}></i>,
+    },
+    {
+      key: '/imageConvert',
+      label: '图片转换',
+      icon: <i className={`iconfont ${current === '/imageConvert' ? 'icon-tupianzhuanhuan-copy' : 'icon-tupianzhuanhuan'}`}></i>,
+    },
+    {
+      key: '/videoPlayer',
+      label: '视频播放器',
+      icon: <i className={`iconfont ${current === '/videoPlayer' ? 'icon-shipinbofang-copy' : 'icon-shipinbofang-copy'}`}></i>,
+    },
+    {
+      key: '/convertFormat',
+      label: '视频转换',
+      icon: <i className={`iconfont ${current === '/convertFormat' ? 'icon-shipinzhuanhuan-copy' : 'icon-shipinzhuanhuan'}`}></i>,
+    },
+  ];
 
   const onClick = (e) => {
     setCurrent(e.key);
@@ -96,12 +94,13 @@ function App() {
                 mode="inline"
                 items={items}
                 selectedKeys={[current]}
+                style={{width: 200, flex: 'none'}}
               />
             </Sider>
           <Layout>
             <Content className='contentStyle'>
               <Routes>
-                <Route path='/' element={<Navigate to="/jsonEditor"/>}></Route>
+                <Route path='/' element={<Navigate to="/"/>}></Route>
                 <Route path='/home' element={<Home />}></Route>
                 <Route path='/convertFormat' element={<ConvertFormat />}></Route>
                 <Route path='/markdown' element={<Markdown />}></Route>
@@ -117,7 +116,6 @@ function App() {
                 <Route path='*' element={<div>页面丢失了</div>}></Route>
               </Routes>
             </Content>
-            <Footer className='footerStyle'>Footer</Footer>
           </Layout>
         </Layout>
       </Layout>

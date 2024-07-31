@@ -1,5 +1,4 @@
 import React from "react";
-import { Button } from "antd";
 
 
 const Home = () => {
@@ -15,9 +14,7 @@ const Home = () => {
   }
 
   return <div>
-    <h2>Home</h2>
-    <Button onClick={() => {handleClick()}}>点击测试</Button>
-    <Button onClick={() => {handleClickTwo()}}>点击Two</Button>
+    <h2>欢迎来到小工具合集</h2>
   </div>
 }
 

@@ -1,5 +1,5 @@
 
-import React,{ useCallback, useEffect, useState, useRef } from 'react'
+import React,{ useState } from 'react'
 import { UploadOutlined } from '@ant-design/icons';
 import { Button, Upload, Typography, message, Select } from 'antd'
 import { getFileSuffix, generateShortId} from '../utils/func.js'
