@@ -12,6 +12,7 @@ import UuidGenerato from './components/UuidGenerato.jsx'
 import UrlResolution from './components/UrlResolution.jsx'
 import BinaryConvert from './components/BinaryConvert.jsx'
 import JsonEditor from './components/JsonEditor.jsx'
+import WxRead from './components/WxRead.jsx'
 
 
 const { Header, Footer, Sider, Content } = Layout;
@@ -73,6 +74,10 @@ function App() {
       label: '视频播放器',
       icon: <i className={`iconfont ${current === '/videoPlayer' ? 'icon-shipinbofang-copy' : 'icon-shipinbofang-copy'}`}></i>,
     },
+    {
+      key: '/wxRead',
+      label: '微信读书',
+    },
     dev ? 
     {
       key: '/convertFormat',
@@ -115,6 +120,7 @@ function App() {
                 <Route path='/uuidGenerato' element={<UuidGenerato />}></Route>
                 <Route path='/binaryConvert' element={<BinaryConvert />}></Route>
                 <Route path='/jsonEditor' element={<JsonEditor />}></Route>
+                <Route path='/wxRead' element={<WxRead />}></Route>
                 
                 <Route path='*' element={<div>页面丢失了</div>}></Route>
               </Routes>

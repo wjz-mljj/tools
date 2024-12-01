@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const fs = require('fs');
 const converFormat = require('./electron/converFormat.js')
 const imageConvert = require('./electron/imageConvert.js')
+const wxRead = require('./electron/wxRead.js')
 
 if (require('electron-squirrel-startup')) {
   app.quit();
@@ -18,6 +19,7 @@ const createWindow = () => {
     height: 800,
     webPreferences: {
       preload: MAIN_WINDOW_PRELOAD_WEBPACK_ENTRY,
+      nodeIntegration: true,
     },
   });
 
@@ -31,6 +33,7 @@ const createWindow = () => {
     converFormat();
   }
   imageConvert();
+  wxRead();
 };
 
 const template = [
